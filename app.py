@@ -32,69 +32,257 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .main-title {
-        font-size: 30px;
+    :root {
+        --ink: #111827;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --panel: #ffffff;
+        --soft: #f8fafc;
+        --accent: #2563eb;
+        --accent-dark: #1d4ed8;
+        --accent-soft: #eff6ff;
+        --ok: #0f766e;
+        --ok-soft: #f0fdfa;
+    }
+    .stApp {
+        background: #f4f6f8;
+        color: var(--ink);
+    }
+    [data-testid="stHeader"] {
+        background: rgba(244, 246, 248, 0.9);
+        backdrop-filter: blur(10px);
+    }
+    [data-testid="stToolbar"] {
+        opacity: 0.35;
+    }
+    .block-container {
+        max-width: 1240px;
+        padding-top: 28px;
+        padding-bottom: 48px;
+    }
+    section[data-testid="stSidebar"] {
+        background: #ffffff;
+        border-right: 1px solid #e5e7eb;
+    }
+    section[data-testid="stSidebar"] * {
+        color: var(--ink);
+    }
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] .stMarkdown,
+    section[data-testid="stSidebar"] .stCaption {
+        color: #374151 !important;
+    }
+    section[data-testid="stSidebar"] [data-testid="stFileUploader"] {
+        border: 1px dashed #cbd5e1;
+        border-radius: 8px;
+        padding: 10px;
+        background: #f9fafb;
+    }
+    section[data-testid="stSidebar"] input,
+    section[data-testid="stSidebar"] textarea,
+    section[data-testid="stSidebar"] select {
+        color: var(--ink) !important;
+    }
+    section[data-testid="stSidebar"] [data-baseweb="select"] * {
+        color: var(--ink) !important;
+    }
+    .sidebar-brand {
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 14px 14px 13px;
+        margin: 8px 0 18px;
+        box-shadow: 0 1px 2px rgba(17, 24, 39, 0.03);
+    }
+    .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #111827 0%, #0f766e 100%);
+        color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+    .brand-title {
+        color: #111827;
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1.3;
+    }
+    .brand-sub {
+        color: #6b7280;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+    .hero-shell {
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 24px 26px 22px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 28px rgba(17, 24, 39, 0.055);
+    }
+    .hero-topline {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(250px, 360px);
+        gap: 22px;
+        align-items: start;
+    }
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #99f6e4;
+        background: var(--ok-soft);
+        color: var(--ok);
+        border-radius: 6px;
+        padding: 5px 9px;
+        font-size: 12px;
         font-weight: 700;
-        margin-bottom: 4px;
+        margin-bottom: 12px;
+    }
+    .main-title {
+        color: var(--ink);
+        font-size: 32px;
+        line-height: 1.15;
+        font-weight: 800;
+        margin-bottom: 10px;
+        letter-spacing: 0;
     }
     .sub-title {
-        color: #5f6b7a;
+        color: var(--muted);
         font-size: 15px;
-        margin-bottom: 22px;
+        margin-bottom: 0;
+        max-width: 780px;
+    }
+    .hero-chip-row {
+        display: grid;
+        gap: 8px;
+        margin-top: 2px;
+    }
+    .hero-chip {
+        border: 1px solid #e5e7eb;
+        background: #f8fafc;
+        color: #374151;
+        border-radius: 8px;
+        padding: 9px 11px;
+        font-size: 12px;
+        line-height: 1.35;
+        overflow-wrap: anywhere;
+    }
+    .workflow-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 22px;
+    }
+    .workflow-step {
+        border: 1px solid #e5e7eb;
+        border-top: 3px solid #94a3b8;
+        border-radius: 8px;
+        background: #f8fafc;
+        padding: 12px 12px 11px;
+    }
+    .workflow-kicker {
+        color: #2563eb;
+        font-size: 11px;
+        font-weight: 800;
+        margin-bottom: 3px;
+        text-transform: uppercase;
+    }
+    .workflow-title {
+        color: #111827;
+        font-size: 13px;
+        font-weight: 750;
+    }
+    .section-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+        margin-bottom: 16px;
+    }
+    .section-title {
+        color: var(--ink);
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
+    .section-note {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 12px;
     }
     .result-card {
-        border: 1px solid #d9e2ec;
+        border: 1px solid var(--line);
         border-radius: 8px;
         padding: 22px 24px;
-        background: #ffffff;
+        background: var(--panel);
         box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
     }
     .metric-strip {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 12px;
-        margin: 10px 0 18px 0;
+        margin: 0 0 22px 0;
     }
     .metric-box {
-        border: 1px solid #d9e2ec;
+        border: 1px solid var(--line);
         border-radius: 8px;
-        padding: 12px 14px;
-        background: #f8fafc;
+        padding: 16px 17px;
+        background: var(--panel);
+        box-shadow: 0 1px 3px rgba(17, 24, 39, 0.04);
     }
     .metric-label {
-        color: #64748b;
+        color: var(--muted);
         font-size: 13px;
     }
     .metric-value {
-        font-size: 22px;
+        color: var(--ink);
+        font-size: 24px;
         font-weight: 700;
-        margin-top: 2px;
+        margin-top: 4px;
+        line-height: 1.2;
     }
     div.stButton > button[kind="primary"] {
-        background-color: #16a34a;
-        border-color: #16a34a;
+        background-color: var(--accent);
+        border-color: var(--accent);
         color: #ffffff;
+        font-weight: 800;
+        border-radius: 8px;
+        min-height: 46px;
+        box-shadow: 0 8px 16px rgba(37, 99, 235, 0.18);
     }
     div.stButton > button[kind="primary"]:hover {
-        background-color: #15803d;
-        border-color: #15803d;
+        background-color: var(--accent-dark);
+        border-color: var(--accent-dark);
         color: #ffffff;
     }
+    div.stDownloadButton > button {
+        border-radius: 8px;
+        min-height: 44px;
+        font-weight: 800;
+    }
     .report-hint {
-        border-left: 4px solid #16a34a;
-        background: #f0fdf4;
-        color: #14532d;
-        padding: 10px 14px;
-        border-radius: 6px;
+        border-left: 4px solid var(--accent);
+        background: #eff6ff;
+        color: #1e3a8a;
+        padding: 12px 14px;
+        border-radius: 8px;
         margin: 10px 0 18px;
         font-size: 14px;
     }
     .phase-box {
-        border: 1px solid #d9e2ec;
+        border: 1px solid var(--line);
         border-radius: 8px;
-        background: #ffffff;
-        padding: 14px 16px;
-        margin: 10px 0;
+        background: var(--panel);
+        padding: 16px;
+        margin: 12px 0;
+        box-shadow: 0 1px 3px rgba(17, 24, 39, 0.04);
     }
     .phase-line {
         display: flex;
@@ -104,8 +292,47 @@ st.markdown(
         color: #334155;
     }
     .phase-percent {
-        color: #16a34a;
+        color: var(--accent);
         font-weight: 700;
+    }
+    .data-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 18px;
+        box-shadow: 0 1px 3px rgba(17, 24, 39, 0.04);
+        min-height: 100%;
+    }
+    div[data-testid="stDataFrame"] {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #ffffff;
+    }
+    div[data-testid="stAlert"] {
+        border-radius: 8px;
+    }
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        border-radius: 8px;
+        border-color: #e5e7eb;
+        box-shadow: 0 1px 3px rgba(17, 24, 39, 0.035);
+    }
+    @media (max-width: 900px) {
+        .main-title {
+            font-size: 26px;
+        }
+        .hero-topline {
+            grid-template-columns: 1fr;
+        }
+        .hero-shell {
+            padding: 18px;
+        }
+        .workflow-row {
+            grid-template-columns: 1fr;
+        }
+        .metric-strip {
+            grid-template-columns: 1fr;
+        }
     }
     </style>
     """,
@@ -538,7 +765,17 @@ def call_llm_api(
 # 侧边栏：配置与控制台
 # =============================
 with st.sidebar:
-    st.header("配置与控制台")
+    st.markdown(
+        """
+        <div class="sidebar-brand">
+            <div class="brand-mark">5G</div>
+            <div class="brand-title">Delivery Intelligence</div>
+            <div class="brand-sub">BOM automation · Work order drafting</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.caption("控制台")
 
     uploaded_file = st.file_uploader(
         "上传基站设计元数据表",
@@ -596,20 +833,11 @@ with st.sidebar:
         )
 
     start_button = st.button(
-        "🚀 启动数智化指令转化",
+        "启动数智化指令转化",
         type="primary",
         use_container_width=True,
     )
 
-
-# =============================
-# 主区域：标题与数据源处理
-# =============================
-st.markdown('<div class="main-title">5G通信基建数智化交付系统 (Demo 版)</div>', unsafe_allow_html=True)
-st.markdown(
-    '<div class="sub-title">读取设计元数据表，自动生成施工 BOM 与工序指导书。</div>',
-    unsafe_allow_html=True,
-)
 
 try:
     df = load_design_file(uploaded_file) if uploaded_file else build_demo_dataframe()
@@ -619,28 +847,86 @@ except Exception as exc:
 
 clean_df, validation_errors, validation_warnings = validate_design_data(df)
 work_df = clean_df if not validation_errors else df
+data_source_label = uploaded_file.name if uploaded_file else "系统内置模拟数据"
 
 
 # =============================
-# 主区域上方：原始数据透视
+# 主区域：标题与状态总览
 # =============================
-st.subheader("原始数据透视")
-if uploaded_file:
-    st.caption(f"当前数据源：{uploaded_file.name}")
-else:
-    st.caption("当前数据源：系统内置模拟数据")
+st.markdown(
+    f"""
+    <div class="hero-shell">
+        <div class="hero-topline">
+            <div>
+                <div class="hero-badge">Demo 交付工作台</div>
+                <div class="main-title">5G通信基建数智化交付系统</div>
+                <div class="sub-title">
+                    读取设计元数据表，完成字段校验、规则引擎估算、AI 报告生成和 Word 交付文件导出。
+                </div>
+            </div>
+            <div class="hero-chip-row">
+                <span class="hero-chip">数据源：{html.escape(data_source_label)}</span>
+                <span class="hero-chip">模式：{html.escape(mode)}</span>
+                <span class="hero-chip">引擎：{html.escape(llm_engine)}</span>
+            </div>
+        </div>
+        <div class="workflow-row">
+            <div class="workflow-step">
+                <div class="workflow-kicker">01 Intake</div>
+                <div class="workflow-title">读取设计元数据</div>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-kicker">02 Rules</div>
+                <div class="workflow-title">校验字段与 BOM</div>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-kicker">03 AI Draft</div>
+                <div class="workflow-title">生成交付指令</div>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-kicker">04 Export</div>
+                <div class="workflow-title">导出 Word 报告</div>
+            </div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-st.dataframe(df.head(5), use_container_width=True, hide_index=True)
 
-st.subheader("数据质量校验")
-if validation_errors:
-    for validation_error in validation_errors:
-        st.error(validation_error)
-elif validation_warnings:
-    for validation_warning in validation_warnings:
-        st.warning(validation_warning)
-else:
-    st.success("数据结构校验通过，可用于生成交付指令。")
+# =============================
+# 主区域上方：原始数据透视与校验
+# =============================
+preview_col, quality_col = st.columns([1.65, 1], gap="large")
+
+with preview_col:
+    with st.container(border=True):
+        st.markdown(
+            """
+            <div class="section-title">原始数据透视</div>
+            <div class="section-note">展示前 5 行设计元数据，用于快速确认表头、站点类型和设备型号。</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.dataframe(df.head(5), use_container_width=True, hide_index=True)
+
+with quality_col:
+    with st.container(border=True):
+        st.markdown(
+            """
+            <div class="section-title">数据质量校验</div>
+            <div class="section-note">生成前先检查必填字段、线缆距离和站点编号完整性。</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        if validation_errors:
+            for validation_error in validation_errors:
+                st.error(validation_error)
+        elif validation_warnings:
+            for validation_warning in validation_warnings:
+                st.warning(validation_warning)
+        else:
+            st.success("数据结构校验通过，可用于生成交付指令。")
 
 if llm_engine.startswith("真实") and len(work_df) > sample_rows:
     st.markdown(
@@ -652,6 +938,14 @@ if llm_engine.startswith("真实") and len(work_df) > sample_rows:
         unsafe_allow_html=True,
     )
 
+summary_bom = estimate_bom(work_df)
+st.markdown(
+    """
+    <div class="section-title">规则指标总览</div>
+    <div class="section-note">基于全量数据计算的交付规模指标，用于判断本次任务复杂度。</div>
+    """,
+    unsafe_allow_html=True,
+)
 st.markdown(
     f"""
     <div class="metric-strip">
@@ -660,12 +954,16 @@ st.markdown(
             <div class="metric-value">{len(work_df)}</div>
         </div>
         <div class="metric-box">
+            <div class="metric-label">线缆总长</div>
+            <div class="metric-value">{summary_bom["cable_total"]} m</div>
+        </div>
+        <div class="metric-box">
             <div class="metric-label">字段数</div>
             <div class="metric-value">{len(work_df.columns)}</div>
         </div>
         <div class="metric-box">
             <div class="metric-label">生成模式</div>
-            <div class="metric-value" style="font-size: 18px;">{mode}</div>
+            <div class="metric-value" style="font-size: 18px;">{html.escape(mode)}</div>
         </div>
     </div>
     """,
@@ -676,7 +974,13 @@ st.markdown(
 # =============================
 # 主区域下方：智能转化结果
 # =============================
-st.subheader("智能转化结果")
+st.markdown(
+    """
+    <div class="section-title">智能转化结果</div>
+    <div class="section-note">生成过程会显示阶段百分比，完成后可预览报告并下载 Word 文件。</div>
+    """,
+    unsafe_allow_html=True,
+)
 
 if "ai_result" not in st.session_state:
     st.session_state.ai_result = ""
@@ -781,7 +1085,14 @@ if st.session_state.ai_result:
         on_click=show_download_toast,
     )
 else:
-    st.info("请在左侧配置生成模式后，点击“启动数智化指令转化”。")
+    st.markdown(
+        """
+        <div class="report-hint">
+            等待任务启动：请在左侧选择生成模式与 AI 引擎，然后点击“启动数智化指令转化”。
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 # =============================
