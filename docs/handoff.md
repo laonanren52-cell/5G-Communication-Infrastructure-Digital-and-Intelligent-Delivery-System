@@ -90,6 +90,7 @@ Follow-up requests added:
   - Added review gating before formal material generation.
 - `README.md`
   - Added documentation for lightweight review, batch upload, cache, filtered review table, and fiber allocation output.
+  - Updated version summary through version 12 and added rule-document references.
 - `.gitignore`
   - Added `.design_file_cache/`.
 - `AGENTS.md`
@@ -100,6 +101,7 @@ Follow-up requests added:
   - Current task process log.
 - `CHANGELOG.md`
   - Added version records for lightweight review, grouped review detail filters, fiber allocation table, batch upload, recent file cache, handoff documents, and rule documents.
+  - Added version 12 for batch review file-source tracing, five review filters, rule DOCX output, README updates, and GitHub sync policy.
 
 ## Current Blocking / Risk State
 
@@ -222,3 +224,6 @@ Latest known checks:
 - `py_compile docs/build_rule_docs.py`: passed.
 - DOCX render QA could not complete because LibreOffice/soffice was not found on this machine.
 - `CHANGELOG.md` has been updated through version 11.
+- `README.md`, `CHANGELOG.md`, and `AGENTS.md` have been updated to record the version 12 state and the rule that future project-facing updates should be committed and pushed to GitHub after verification.
+- Streamlit startup via `.venv\Scripts\streamlit.exe` still fails because the venv launcher points to a missing Python 3.12 install.
+- Backup startup with bundled Python plus `.venv\Lib\site-packages` reached `http://127.0.0.1:8501`, but the foreground command was killed by timeout before a separate health check could confirm `200`.

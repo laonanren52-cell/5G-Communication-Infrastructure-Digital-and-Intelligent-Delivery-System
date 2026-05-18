@@ -164,3 +164,20 @@ Invoke-WebRequest -Uri http://127.0.0.1:8501 -UseBasicParsing | Select-Object -E
 ```text
 FileNotFoundError: [WinError 2] 系统找不到指定的文件。
 ```
+
+### README / CHANGELOG / GitHub Sync Follow-up
+
+- Updated `README.md` so the version summary now reaches version 12.
+- Added rule document references to `README.md`.
+- Added `CHANGELOG.md` version 12 covering:
+  - batch review file-source tracing,
+  - five review detail filters,
+  - generated rule DOCX files,
+  - README updates,
+  - future GitHub sync policy.
+- Updated `AGENTS.md` end-of-turn maintenance rules so future project-facing updates should also update `CHANGELOG.md`, then commit and push after verification unless the user asks not to.
+- Validation results:
+  - `py_compile app.py`: passed.
+  - `py_compile docs/build_rule_docs.py`: passed.
+  - Direct `.venv\Scripts\streamlit.exe` startup still failed because the launcher points to missing Python 3.12.
+  - Backup startup with bundled Python and `.venv\Lib\site-packages` reached the Streamlit startup message for `http://127.0.0.1:8501`, but the foreground command timed out and stopped before a separate health check could return `200`.

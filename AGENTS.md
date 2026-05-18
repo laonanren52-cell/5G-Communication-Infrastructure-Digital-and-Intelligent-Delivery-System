@@ -106,4 +106,6 @@ At the end of every future Codex task in this project:
 
 - Update `docs/handoff.md` with the latest state, blockers, and next minimal task.
 - Update `docs/task-log.md` with the key actions, files changed, commands run, successes, failures, and pending items.
+- Update `CHANGELOG.md` for every project-facing change, including feature, documentation, generated artifact, verification, and GitHub sync changes.
+- After verification passes, commit the scoped project changes and push them to the GitHub repository unless the user explicitly asks not to push.
 - Keep updates concise and factual.
