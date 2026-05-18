@@ -68,10 +68,48 @@
 - 增加顶部导航高度和页面上边距，避免导航文字裁切。
 - 保持页面可访问性和 Streamlit 单页 Demo 架构不变。
 
+## 第 9 版：融合赛道 3 的轻量智能审查
+
+- 在赛道 4 主流程前增加“轻量智能审查结果”模块。
+- 新增 `run_design_review(df)`、`build_review_summary(review_df, total_rows)`、`render_review_result(review_df, summary)`。
+- 审查内容覆盖字段完整性、线缆距离异常、站点编号重复、纤芯占用异常、取电方式施工风险和资源配置冲突。
+- 审查结果统一输出 `check_item`、`level`、`message`、`field`、`row_index`、`site_id`、`suggestion` 等字段。
+- 页面展示总体审查结论、总记录数、错误数量、高风险数量、提醒数量和正常数量。
+- 当存在错误级问题时，系统仍允许查看 BOM 和报告预览，但阻止生成正式施工资料，并提示“当前结果仅供预览，不建议作为正式交付材料”。
+- 内置演示数据补充赛题要求的英文标准字段，同时保留原中文字段，避免破坏既有 BOM 与报告逻辑。
+
+## 第 10 版：审查明细分组、纤芯分配表、批量文件与最近缓存
+
+- 审查明细支持按不同类别切换查看，避免正常项和问题项全部堆在同一张表中。
+- 审查明细按风险等级增加颜色提示：错误、高风险、提醒、正常分别使用不同底色。
+- 智能转化结果新增“纤芯分配表”页签。
+- 纤芯分配表可基于 `fiber_start`、`fiber_end`、`fiber_core_count` 自动展开纤芯编号。
+- 若上传数据提供 `fiber_core_id` 或 `fiber_core_no`，优先使用现有纤芯编号。
+- Excel 导出新增“纤芯分配表”Sheet。
+- 上传控件支持一次选择多份 Excel/CSV 文件。
+- 新增批量文件处理概览，显示每个文件的记录数、总体结论、错误/高风险/提醒/正常数量和处理状态。
+- 新增最近 10 份文件缓存，缓存目录为 `.design_file_cache/`，并加入 `.gitignore`。
+- 修复缓存功能首次接入时 `CACHE_INDEX_FILE` 未定义导致的运行时报错。
+
+## 第 11 版：交接文档与规则文档固化
+
+- 新增 `AGENTS.md`，固化项目目标、技术栈、运行命令、测试命令、禁止随意修改的方向和后续 Codex 工作规则。
+- 新增 `docs/handoff.md`，记录当前工程目标、已完成功能、已知错误、未解决事项、下一轮最小任务和优先读取文件。
+- 新增 `docs/task-log.md`，记录本轮关键操作、读取文件、修改文件、执行命令、成功结果、失败结果和待处理事项。
+- 生成规则说明文档：
+  - `docs/程序检查规则.docx`
+  - `docs/数据校验规则.docx`
+- 新增 `docs/build_rule_docs.py` 用于生成规则说明文档。
+- 已知限制：本机未检测到 LibreOffice/soffice，因此 DOCX 渲染 QA 未完成。
+- GitHub 已同步提交 `0364f96 Add design review and handoff docs`，提交内容包括核心代码、README、`.gitignore`、`AGENTS.md` 和交接文档。
+
 ## 当前状态
 
 - 主程序：`app.py`
 - 文档：`README.md`
 - 版本记录：`CHANGELOG.md`
+- 交接规则：`AGENTS.md`
+- 交接状态：`docs/handoff.md`
+- 过程日志：`docs/task-log.md`
 - 依赖：`streamlit`、`pandas`、`openpyxl`
 - 当前仍为演示版本，BOM 规则为简化经验估算，不作为真实采购依据。

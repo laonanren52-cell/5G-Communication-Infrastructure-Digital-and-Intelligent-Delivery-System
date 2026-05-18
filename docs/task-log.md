@@ -16,6 +16,7 @@
 - Added recent 10 uploaded file cache.
 - Fixed runtime crash caused by missing cache constants.
 - Created project handoff and future-agent guidance documents.
+- Updated `CHANGELOG.md` to record versions 9, 10, and 11.
 
 ### Key Files Read
 
@@ -43,6 +44,8 @@
   - Added current handoff.
 - `docs/task-log.md`
   - Added current process log.
+- `CHANGELOG.md`
+  - Added missing version history for the latest feature and documentation work.
 
 ### Commands Run
 
@@ -70,6 +73,7 @@ Test-Path docs\task-log.md
 
 - `py_compile app.py` passed after latest fixes.
 - `http://127.0.0.1:8501` returned `200`.
+- `CHANGELOG.md` now records the lightweight review, grouped review filters, fiber allocation table, batch upload, recent file cache, handoff docs, and generated rule docs.
 - Review function testing earlier showed it could detect:
   - Duplicate site ID
   - Cable distance errors/high risk

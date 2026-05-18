@@ -98,6 +98,8 @@ Follow-up requests added:
   - Current handoff state.
 - `docs/task-log.md`
   - Current task process log.
+- `CHANGELOG.md`
+  - Added version records for lightweight review, grouped review detail filters, fiber allocation table, batch upload, recent file cache, handoff documents, and rule documents.
 
 ## Current Blocking / Risk State
 
@@ -219,3 +221,4 @@ Latest known checks:
   - `数据校验规则.docx`
 - `py_compile docs/build_rule_docs.py`: passed.
 - DOCX render QA could not complete because LibreOffice/soffice was not found on this machine.
+- `CHANGELOG.md` has been updated through version 11.
